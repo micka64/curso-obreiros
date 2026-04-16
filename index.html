@@ -1,14 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  <title>Curso de Obreiros</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Obreiros</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    .box {
+      max-width: 700px;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .controls {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .next {
+      background: green;
+      color: white;
+    }
+
+    .prev {
+      background: gray;
+      color: white;
+    }
+  </style>
 </head>
 
-<body style="background:black;color:white;text-align:center;font-family:sans-serif">
+<body>
 
-<h1>📖 Curso de Obreiros</h1>
-<p>Se o chamado é de Deus, Ele mesmo sustenta.</p>
+<h1>📖 Curso de Preparação de Obreiros</h1>
+
+<div class="box" id="content"></div>
+
+<div class="controls">
+  <button class="prev" onclick="prev()">◀ Anterior</button>
+  <button class="next" onclick="next()">Próximo ▶</button>
+</div>
+
+<script>
+const course = [
+  {
+    module: "Módulo 1 — Chamado Ministerial",
+    lessons: [
+      "Aula 1: O chamado não é humano, é divino (Jeremias 1:5)",
+      "Aula 2: Confirmação do chamado na igreja",
+      "Aula 3: O peso da responsabilidade ministerial"
+    ]
+  },
+  {
+    module: "Módulo 2 — Caráter e Vida Espiritual",
+    lessons: [
+      "Aula 1: Santidade como base do ministério",
+      "Aula 2: Fruto do Espírito (Gálatas 5)",
+      "Aula 3: Vida de oração e disciplina espiritual"
+    ]
+  },
+  {
+    module: "Módulo 3 — Doutrina Bíblica",
+    lessons: [
+      "Aula 1: Autoridade das Escrituras",
+      "Aula 2: Cristo como centro da teologia",
+      "Aula 3: Discernimento de falsas doutrinas"
+    ]
+  }
+];
+
+let moduleIndex = 0;
+let lessonIndex = 0;
+
+function render() {
+  const mod = course[moduleIndex];
+  const lesson = mod.lessons[lessonIndex];
+
+  document.getElementById("content").innerHTML =
+    "<h2>" + mod.module + "</h2><p>" + lesson + "</p>";
+}
+
+function next() {
+  if (lessonIndex < course[moduleIndex].lessons.length - 1) {
+    lessonIndex++;
+  } else if (moduleIndex < course.length - 1) {
+    moduleIndex++;
+    lessonIndex = 0;
+  }
+  render();
+}
+
+function prev() {
+  if (lessonIndex > 0) {
+    lessonIndex--;
+  } else if (moduleIndex > 0) {
+    moduleIndex--;
+    lessonIndex = course[moduleIndex].lessons.length - 1;
+  }
+  render();
+}
+
+render();
+</script>
 
 </body>
 </html>
