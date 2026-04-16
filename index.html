@@ -18,7 +18,186 @@
       height: 100vh;
       text-align: center;
       padding: 20px;
+    }<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Obreiros</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
     }
+
+    .card {
+      max-width: 800px;
+      width: 100%;
+      background: #111;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #4ade80;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .controls {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .next { background: #16a34a; color: white; }
+    .prev { background: #444; color: white; }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>📖 Curso de Preparação de Obreiros</h1>
+
+  <h2 id="module"></h2>
+  <p id="lesson"></p>
+
+  <ul id="topics"></ul>
+
+  <div class="controls">
+    <button class="prev" onclick="prev()">◀ Anterior</button>
+    <button class="next" onclick="next()">Próximo ▶</button>
+  </div>
+
+</div>
+
+<script>
+const course = [
+  {
+    module: "Módulo 1 — Chamado Ministerial",
+    lessons: [
+      {
+        title: "Aula 1 — O chamado de Deus",
+        topics: [
+          "O chamado não nasce do homem (Jeremias 1:5)",
+          "Separação antes da fundação do mundo",
+          "Confirmação espiritual e autoridade da igreja",
+          "Peso espiritual da vocação ministerial"
+        ]
+      },
+      {
+        title: "Aula 2 — Processos do chamado",
+        topics: [
+          "Deus chama, mas também trata",
+          "O deserto como formação",
+          "Tempo de preparo oculto",
+          "Fruto antes da plataforma"
+        ]
+      }
+    ]
+  },
+  {
+    module: "Módulo 2 — Caráter e Vida Espiritual",
+    lessons: [
+      {
+        title: "Aula 1 — Santidade",
+        topics: [
+          "Separação do pecado",
+          "Vida no Espírito",
+          "Romanos 12 como padrão de transformação",
+          "Consistência fora do púlpito"
+        ]
+      },
+      {
+        title: "Aula 2 — Fruto do Espírito",
+        topics: [
+          "Gálatas 5:22-23",
+          "Caráter acima de dons",
+          "Domínio próprio como base ministerial",
+          "Evidência de maturidade espiritual"
+        ]
+      }
+    ]
+  }
+];
+
+let m = 0;
+let l = 0;
+
+function render() {
+  const mod = course[m];
+  const lesson = mod.lessons[l];
+
+  document.getElementById("module").innerText = mod.module;
+  document.getElementById("lesson").innerText = lesson.title;
+
+  const list = document.getElementById("topics");
+  list.innerHTML = "";
+
+  lesson.topics.forEach(t => {
+    const li = document.createElement("li");
+    li.innerText = "• " + t;
+    list.appendChild(li);
+  });
+}
+
+function next() {
+  if (l < course[m].lessons.length - 1) {
+    l++;
+  } else if (m < course.length - 1) {
+    m++;
+    l = 0;
+  }
+  render();
+}
+
+function prev() {
+  if (l > 0) {
+    l--;
+  } else if (m > 0) {
+    m--;
+    l = course[m].lessons.length - 1;
+  }
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>
 
     h1 {
       font-size: 28px;
